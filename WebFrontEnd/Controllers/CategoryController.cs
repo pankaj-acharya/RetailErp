@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ErpServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebFrontEnd.Controllers
@@ -9,7 +13,9 @@ namespace WebFrontEnd.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
+
         #region Ctor
+
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
@@ -18,7 +24,10 @@ namespace WebFrontEnd.Controllers
 
         // GET: api/Category
         [HttpGet]
-        public IEnumerable<string> Get() => new string[] { "value1", "value2" };
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
 
         // GET: api/Category/5
         [HttpGet("{id}", Name = "Get")]

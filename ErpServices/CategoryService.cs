@@ -29,5 +29,10 @@ namespace ErpServices
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteCategory()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
