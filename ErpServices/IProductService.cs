@@ -7,9 +7,21 @@ namespace ErpServices
 {
     public interface IProductService
     {
-        void CreateProduct(Product product);
-        void UpdateProduct(Product product);
-        void DeleteProduct(int id);
+        //Create
+        Product Create(Product product);
 
+        //Read
+        List<Product> Get();
+        Product Get(int id);
+
+        //Update
+        Product Update(Product product);
+
+        //Delete
+        bool Delete(int id);
+
+        //Helpers
+        //TODO:Should this be abstracted in  newly created ProductCategory in future? 
+        List<Product> GetProductsInCategory(int categoryId);
     }
 }

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ErpModel.Product>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<h2>Product listing page</h2>
+@foreach (var product in Model)
+{
+    <h2>@product.Name</h2>
+    <b>Price:</b>@product.Price
+    @Html.ActionLink("Edit","Edit","Product",new {id=@product.Id})
+}
+
+
+

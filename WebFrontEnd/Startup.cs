@@ -35,6 +35,9 @@ namespace WebFrontEnd
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IProductService, ProductService>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
+
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
         }

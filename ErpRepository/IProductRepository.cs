@@ -7,7 +7,20 @@ namespace ErpRepository
 {
     public interface IProductRepository
     {
-        Product GetProductById(int id);
+        //Create
+        Product Create(Product product);
+
+        //Read
+        List<Product> Get();
+        Product Get(int id);
+
+        //Update
+        Product Update(Product product);
+
+        //Delete
+        bool Delete(int productId);
+
+        //Helpers
         List<Product> GetProductsByCategory(int categoryId);
     }
 }

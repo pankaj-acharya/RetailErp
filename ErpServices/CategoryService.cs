@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ErpModel;
 using ErpRepository;
 
@@ -15,24 +16,40 @@ namespace ErpServices
             _categoryRepository = categoryRepository;
         }
         #endregion
-        public void CreateCategory()
+
+        #region Create
+        public Category Create(Category category)
         {
-            throw new NotImplementedException();
+            return _categoryRepository.Create(category);
+        }
+        #endregion
+
+        #region Read
+        public List<Category> Get()
+        {
+            return _categoryRepository.Get();
         }
 
-        public Category GetCategoryById(int categoryId)
+        public Category Get(int id)
         {
-          return  _categoryRepository.GetById(categoryId);
+            return _categoryRepository.Get(id);
         }
+        #endregion
 
-        public void UpdateCategory()
+        #region Update
+        public Category Update(Category category)
         {
-            throw new NotImplementedException();
+            return _categoryRepository.Update(category);
         }
+        #endregion
 
-        public void DeleteCategory()
+        #region Delete
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            //Before deleting category need to remove Prod > Category relation
+            //and mark the category as deleted i.e soft delete 
+            return _categoryRepository.Delete(id);
         }
+        #endregion
     }
 }

@@ -4,7 +4,16 @@ namespace ErpRepository
 {
     public interface ICategoryRepository
     {
-        List<Category> GetAll();
-        Category GetById(int categoryId);
+        //Create
+        Category Create(Category category);
+        //Read
+        List<Category> Get();
+        Category Get(int id);
+        //Update
+        Category Update(Category category);
+        //Delete
+        bool Delete(int id);
+
+        //Helpers
     }
 }

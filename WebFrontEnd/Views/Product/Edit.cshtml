@@ -1,0 +1,18 @@
+﻿@model ErpModel.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("Edit", "Product"))
+{
+    <h2>Edit product</h2>
+    @Html.TextBoxFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Price)
+    @Html.TextBoxFor(m => m.Id)
+
+    <input type="submit" value="Create" />
+}
+
+

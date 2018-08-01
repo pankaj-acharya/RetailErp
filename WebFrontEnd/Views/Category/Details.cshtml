@@ -1,0 +1,14 @@
+﻿@model ErpModel.Category
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+
+@using (Html.BeginForm("Details", "Category"))
+{
+    <h2>Edit Category</h2>
+    @Html.TextBoxFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Id)
+
+    <input type="submit" value="Create"/>
+}

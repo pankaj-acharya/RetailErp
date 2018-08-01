@@ -7,10 +7,20 @@ namespace ErpServices
 {
     public interface ICategoryService
     {
-        Category GetCategoryById(int categoryId);
-        void CreateCategory();
-        void UpdateCategory();
-        void DeleteCategory();
+        //Create
+        Category Create(Category category);
+
+        //Read
+        List<Category> Get();
+        Category Get(int id);
+        
+        //Update
+        Category Update(Category category);
+
+        //Delete
+        bool Delete(int id);
+
+        //Helpers
 
     }
 }
