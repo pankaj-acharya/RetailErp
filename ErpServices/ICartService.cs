@@ -10,7 +10,7 @@ namespace ErpServices
     public interface ICartService
     {
         //Create
-        Cart Add(int productId,int qty,int sessionId);
+        Cart Add(int productId,int qty,string sessionId);
         //Read
         Cart Get(int sessionId);
         //Update

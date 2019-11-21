@@ -5,7 +5,23 @@
     Layout = "_Layout";
 }
 
-<h2>Product Details</h2>
-@Model.Name
-@Model.Price
-@Model.Id
+<div class="col-md-4">
+    <h2>Product Details</h2>
+    <img src="~/images/productdefault.jpg" class="img-responsive" alt="Responsive Image" />
+</div>
+
+<div class="col-md-8">
+    <h3>@Model.Name</h3>
+    <div class="">
+        £ @Model.Price
+    </div>
+    
+    @Model.Id
+    <div>
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("AddToBag", "Product",new {id=@Model.Id})'" type="button">Add to Cart</button>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <p class="text-primary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>

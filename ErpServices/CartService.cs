@@ -17,21 +17,19 @@ namespace ErpServices
         }
 
         #endregion
-        public Cart Add(int productId, int qty, int sessionId)
+        public Cart Add(int productId, int qty, string sessionId)
         {
             
             try
             {
-                var cart = new Cart
-                {
-
-                };
+               var  cart = new Cart();
                 var basketProduct = _productService.Get(productId);
 
                 if (basketProduct != null)
                 {
-                    
-
+                    var cartItems = new CartItem { LinePrice = 0.0, Product = basketProduct, Qty = qty };
+                  
+                    cart.Items.Add(cartItems);
                 }
 
                 return cart;
@@ -55,6 +53,10 @@ namespace ErpServices
         }
 
         public Cart ApplyCoupon()
+        {
+            throw new NotImplementedException();
+        }
+        public void RefreshCart()
         {
             throw new NotImplementedException();
         }

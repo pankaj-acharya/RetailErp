@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ErpModel;
 using ErpServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Http;
 
 namespace WebFrontEnd.Controllers
 {
@@ -15,10 +11,12 @@ namespace WebFrontEnd.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService,ICartService cartService)
         {
             _productService = productService;
+            _cartService = cartService;
         }
         // GET: api/Product
         [HttpGet]
@@ -31,12 +29,12 @@ namespace WebFrontEnd.Controllers
         [HttpGet("{id}", Name = "GetProduct")]
         [ProducesResponseType(200, Type = typeof(Product))]
         [ProducesResponseType(404)]
-        public IActionResult Get(int id)
+        public ViewResult Get(int id)
         {
             var product= _productService.Get(id);
             if (product == null)
-                return NotFound();
-            return Ok(product);
+                return View("Error");
+            return View("Details", product);
         }
 
         // POST: api/Product
@@ -65,6 +63,46 @@ namespace WebFrontEnd.Controllers
            
             _productService.Delete(id);
             return new StatusCodeResult(200);//Check the status code for deletion
+        }
+        
+        [Route("Product/AddToBag")]
+        public IActionResult AddToBag(int id)
+        {
+            // var product = _productService.Get(id);
+
+            //Read cartGuid from cookie
+            string cookieValue;
+            Request.Cookies.TryGetValue("ErpCart",out cookieValue);
+
+            #region TestCode
+            if (!HttpContext.Request.Cookies.ContainsKey("first_request"))
+            {
+                HttpContext.Response.Cookies.Append("first_request", DateTime.Now.ToString(), new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.Now.AddDays(7) });
+                //return Content("Welcome, new visitor!");
+            }
+            else
+            {
+                DateTime firstRequest = DateTime.Parse(HttpContext.Request.Cookies["first_request"]);
+                //return Content("Welcome back, user! You first visited us on: " + firstRequest.ToString());
+            }
+            #endregion
+
+            //#region Move this logic in CartService
+            //if (string.IsNullOrEmpty(cookieValue))
+            //{
+            //    cookieValue = Guid.NewGuid().ToString();
+            //    Response.Cookies.Append("ErpCart", cookieValue, new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.Now.AddDays(1) });
+            //}
+            //#endregion
+
+            //var userCart = _cartService.Add(id, 1, cookieValue);
+
+            return new StatusCodeResult(200);
+        }
+
+        public IActionResult Edit()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
