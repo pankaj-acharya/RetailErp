@@ -68,34 +68,21 @@ namespace WebFrontEnd.Controllers
         [Route("Product/AddToBag")]
         public IActionResult AddToBag(int id)
         {
-            // var product = _productService.Get(id);
 
             //Read cartGuid from cookie
             string cookieValue;
-            Request.Cookies.TryGetValue("ErpCart",out cookieValue);
+            Request.Cookies.TryGetValue("cartguid",out cookieValue);
 
-            #region TestCode
-            if (!HttpContext.Request.Cookies.ContainsKey("first_request"))
+            #region Move this logic in CartService
+            if (string.IsNullOrEmpty(cookieValue))
             {
-                HttpContext.Response.Cookies.Append("first_request", DateTime.Now.ToString(), new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.Now.AddDays(7) });
-                //return Content("Welcome, new visitor!");
+                cookieValue = Guid.NewGuid().ToString();
+                Response.Cookies.Append("cartguid", cookieValue, new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.Now.AddDays(1),IsEssential =true });
             }
-            else
-            {
-                DateTime firstRequest = DateTime.Parse(HttpContext.Request.Cookies["first_request"]);
-                //return Content("Welcome back, user! You first visited us on: " + firstRequest.ToString());
-            }
+            
             #endregion
 
-            //#region Move this logic in CartService
-            //if (string.IsNullOrEmpty(cookieValue))
-            //{
-            //    cookieValue = Guid.NewGuid().ToString();
-            //    Response.Cookies.Append("ErpCart", cookieValue, new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.Now.AddDays(1) });
-            //}
-            //#endregion
-
-            //var userCart = _cartService.Add(id, 1, cookieValue);
+            var userCart = _cartService.Add(id, 1, cookieValue);
 
             return new StatusCodeResult(200);
         }

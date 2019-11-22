@@ -17,7 +17,7 @@ namespace ErpServices
         }
 
         #endregion
-        public Cart Add(int productId, int qty, string sessionId)
+        public Cart Add(int productId, int qty, string cartGUID)
         {
             
             try
